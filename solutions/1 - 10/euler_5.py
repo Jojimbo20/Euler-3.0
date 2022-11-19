@@ -1,5 +1,6 @@
 """
-    EULER 5: 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+    EULER 5: 
+    2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
 
     What is the smallest possible number evenly divisible by all numbers from 1 to 20?
 """
