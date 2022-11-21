@@ -25,7 +25,7 @@ def is_prime(n):
 
     #Iterates from 3 up to the square root of n only checking odd numbers as the product of a number and any even number is always an even number
     #If it finds a factor that is between 3 and the square root then the number is not prime
-    for num in range(3, lim):
+    for num in range(3, lim, 2):
         if n % num == 0:            
             return False
     

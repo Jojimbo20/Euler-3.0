@@ -13,26 +13,33 @@
     Find the difference between the sum of the squares of the first 100 natural numbers
     and the square of the sum. 
 """
+
+
+#Solution:
 import time
 start_time = time.time()
 
-target = 100
+target = 100 #Define your range
 
+#Go through each number and add each number too get the sum of all natural numbers in your range
 i = 1 
 sum_of_nums = 0
-
 while i <= target:
     sum_of_nums += i
     i += 1
 
-square_of_sum = sum_of_nums * sum_of_nums
+#Get the square of this number
+square_of_sum = sum_of_nums ** 2
 
+
+#Go through each number, find it's square, then add it to the running total
 i = 1
 sum_of_squares = 0
 while i <= target:
-    sum_of_squares += i*i 
+    sum_of_squares += i**2 
     i += 1
 
+#Your answer is the difference between these two numbers
 ans = abs(sum_of_squares - square_of_sum)
 
 print("The difference between the sum of the squares of the first 100 natural numbers and the square of the sum is: {a}".format(a=ans))
