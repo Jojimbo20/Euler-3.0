@@ -37,5 +37,39 @@
     Print the current highest product
 
 """
+import time
+start_time = time.time()
 
-print("Success")
+def get_product(_list):
+    product = 1
+    for item in _list:
+        product *= int(item)
+    return product
+
+working_list = []
+current_num = 0 
+#Whilst the file is open
+with open(r'C:\Users\jorda\source\repos\Euler-3.0\solutions\1_10\euler_8_number.txt') as _file:
+    while len(working_list) <= 13:
+        i = _file.read(1)
+
+        #If the next character is an empty string, the file has no more integers and the loop should end
+        if(i == ""):
+            break
+
+        #As long as the charcter is not a new line character, keep adding chars one by one until we have 13
+        elif(i != "\n"):
+            working_list.append(i)
+
+            #Once we have 13 calculate it's product, if the new product is greater than the old product, store it
+            #Remove the first element of the list to make room for a new item at the end
+            if len(working_list) == 13:
+                new_num = get_product(working_list)
+                del working_list[0]
+
+                if(current_num < new_num):
+                    current_num = new_num
+        
+
+print("The largest product of 13 adjacent numbers in your number is: ",str(current_num))
+print("--- %s seconds ---" % (time.time() - start_time))

@@ -13,6 +13,8 @@
 
 #Solution:
 import math
+import time
+start_time = time.time()
 
 def is_prime(p):
     #Prime numbers can't be even
@@ -41,3 +43,4 @@ while len(primes) <= position:
     p += 2
 
 print("10001st prime number is: {p}".format(p=primes[-1]))
+print("--- %s seconds ---" % (time.time() - start_time))
