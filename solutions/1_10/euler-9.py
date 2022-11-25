@@ -19,6 +19,20 @@
     Create an algorithm to generate the complete list of possible solutions to a + b + c = desired_sum
     Then check each solution to see if the following equation is true:
     a*a + b*b = c*c
+
+    c starts at the highest possible number
+    b starts at just one above a
+    a starts at 1
+
+    for every pass:
+        c should decrement by one, 
+        b should increment by one
+        until c becomes equal to or less than b, invalidating the b < c condition
+
+    when condition is invalidated:
+        increment a by 1
+        set b to a + 1 to satisfy the condition a < b
+        set c to what it was initially - 2 
 """
 """
     Input desired_sum of the three variables
@@ -33,8 +47,9 @@
         increment b by 1
         decrement c by 1
         
-        if c <= b then the condition b < c is no longer valid:
+        if c <= b:
             decrease the upper limit of c by 2 (num of variables - 1)
+            set c to the new number
             increment a by 1 
             set b to a + 1
 """
