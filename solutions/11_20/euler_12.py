@@ -17,6 +17,24 @@ def get_num_factors(n):
 
     return factors
 
+def get_num_factors_2(n):
+    if n == 1:
+        return 1
+
+    lim = int(n/2) + 1
+    factors = 1
+    product = 1
+
+    for i in range(2, lim):
+        if n % i == 0:
+            factors += 1
+            product *= i
+            if product == n:
+                break
+            elif n % product == 0:
+                factors += 1
+    return factors
+
 def print_factors(n):
     lim = int(n/2) + 1
     factors = "Factors:"
@@ -55,9 +73,9 @@ factors = 1
 running_total = 0
 iterator = 1
 
-while factors <= 100:
+while factors <= 10:
     running_total += iterator
-    factors = get_num_factors(running_total)
+    factors = get_num_factors_2(running_total)
     iterator += 1   
 
 print("Triangle number:",int(iterator),"\nValue:",int(running_total))
