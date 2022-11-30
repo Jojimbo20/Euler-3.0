@@ -32,6 +32,8 @@
 """
 
 import time
+import os
+from tkinter import Grid
 start_time = time.time()
 
 def get_largest_product_omnidirectional(matrix):
@@ -53,14 +55,15 @@ def get_largest_product_horizontal(matrix):
     largest_product = 1
 
     #Since the matrix is a list of lists, we can take each list one at a time to process horizontally    
-    for row in matrix:
+    for row_index in range(0, len(matrix) - 3):
         working_product = 1
-        for column_index in range(0, len(row)-3):
-            working_product = row[column_index] * row[column_index + 1] * row[column_index + 2] * row[column_index + 3]
+        for column_index in range(0, len(matrix[0])-3):
+            working_product = matrix[row_index][column_index] * matrix[row_index][column_index + 1] * matrix[row_index][column_index + 2] * matrix[row_index][column_index + 3]
 
             if working_product > largest_product:
                 largest_product = working_product
                 working_product = 1
+
     return largest_product
 
 def get_largest_product_vertical(matrix):
@@ -134,5 +137,17 @@ with open(r'C:\Users\jorda\source\repos\Euler-3.0\solutions\11_20\euler_11_numbe
             temp_list.append(int(temp_num))
             temp_num = ""
 
-print("The largest product in any direction is: ",str(get_largest_product_omnidirectional(grid_num)))
+#Print grid
+for row in range(0,len(grid_num)):
+    working_str = ""
+    for col in range(0,len(grid_num[0])):
+        if grid_num[row][col] < 10:
+            working_str += "0" + str(grid_num[row][col]) + " "
+        else:
+            working_str += str(grid_num[row][col]) + " "
+    print(working_str)
+
+print("\nThe largest product in this grid in any direction is: ",str(get_largest_product_omnidirectional(grid_num)))
+
+
 print("--- %s seconds ---" % (time.time() - start_time))
