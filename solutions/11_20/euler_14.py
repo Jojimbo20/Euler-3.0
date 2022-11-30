@@ -1,3 +1,6 @@
+import time
+start_time = time.time()
+
 #Collatz sequence
 longest_chain = []
 
@@ -18,5 +21,6 @@ for i in range(2,1000000):
 
 print(str(longest_chain[0]))
 
+print("--- %s seconds ---" % (time.time() - start_time))
 
 
