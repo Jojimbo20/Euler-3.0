@@ -26,43 +26,101 @@
 """
 """
     1) Read each line as a list of ints into a list to from a matrix
-    2) 
+    2) Once the matrix is generated
+    3) Pass to functions that calculate the largest product in a single direction. 
+    4) Return highest product
 """
 
-"""
-        YOU ARE WORKING ON THIS FUNCTION!!!!!!!!!!!!!!!!!!!!
+import time
+start_time = time.time()
 
-"""
+def get_largest_product_omnidirectional(matrix):
+    largest_product = 1
+    largest_horizontal_product = get_largest_product_horizontal(matrix)
+    largest_vertical_product = get_largest_product_vertical(matrix)
+    largest_diagonal_product = get_largest_product_diagonal(matrix)
+
+    if largest_product < largest_horizontal_product:
+        largest_product = largest_vertical_product
+    if largest_product < largest_vertical_product:
+        largest_product = largest_vertical_product
+    if largest_product < largest_diagonal_product:
+        largest_product = largest_diagonal_product
+
+    return largest_product
+
 def get_largest_product_horizontal(matrix):
     largest_product = 1
+
+    #Since the matrix is a list of lists, we can take each list one at a time to process horizontally    
     for row in matrix:
         working_product = 1
-
-        for i in range(0, len(row)-3):
-            working_product = row[i] * row [i+1] * row[i+2] * row[i+3]
+        for column_index in range(0, len(row)-3):
+            working_product = row[column_index] * row[column_index + 1] * row[column_index + 2] * row[column_index + 3]
 
             if working_product > largest_product:
                 largest_product = working_product
                 working_product = 1
     return largest_product
 
-def get_largest_product_vertical(matrix, n):
+def get_largest_product_vertical(matrix):
+    largest_product = 1
 
-    pass
-def get_largest_product_diagonal(matrix, n):
+    #To read vertically the function needs to get values from different rows but the same column 
+    for column_index in range(0,len(matrix[0])):
+        working_product = 1
+        for row_index in range(0,len(matrix)-3):
+            working_product = matrix[row_index][column_index] * matrix[row_index + 1][column_index] * matrix[row_index + 2][column_index] * matrix[row_index + 3][column_index]
 
-    pass
+            if working_product > largest_product:
+                largest_product = working_product
+                working_product = 1
+
+    return largest_product
    
+def get_largest_product_diagonal(matrix):
+    largest_product = 1
+    
+    #Diagonal bottom left to top right /
+    for column_index in range(0, len(matrix[0]) - 3):
+        working_product = 1
+        for row_index in range(0, len(matrix) - 3):        
+            working_product = matrix[row_index][column_index] * matrix[row_index + 1][column_index + 1] * matrix[row_index + 2][column_index + 2] * matrix[row_index + 3][column_index + 3]
+        
+            if working_product > largest_product:
+                largest_product = working_product
+                working_product = 1
+    
+    #Diagonal top left to bottom right \
+    for column_index in range(3, len(matrix[0])):
+        working_product = 1
+        for row_index in range(0, len(matrix) - 3):        
+            working_product = matrix[row_index][column_index] * matrix[row_index + 1][column_index - 1] * matrix[row_index + 2][column_index - 2] * matrix[row_index + 3][column_index - 3]
+        
+            if working_product > largest_product:
+                largest_product = working_product
+                working_product = 1
+    return largest_product
+
+        
+    
+
+    pass
 
 grid_num = []
 temp_list = []
 temp_num = ""
 char = "0"
 
+#This part of the program reads the numbers into the grid number
+#Will read one char at a time until a space is found, 
+#Once a space is found it appends the two numbers together and adds them into the temporary list
+#If a new line is detected, or the end of the file, then the temporary list is appended to the grid number
 with open(r'C:\Users\jorda\source\repos\Euler-3.0\solutions\11_20\euler_11_number.txt') as _file:
     while char != "":
+        #Read one char at a time
         char = _file.read(1)
-        
+
         if char == "\n" or char == "":
             temp_list.append(int(temp_num))
             temp_num = ""
@@ -76,6 +134,5 @@ with open(r'C:\Users\jorda\source\repos\Euler-3.0\solutions\11_20\euler_11_numbe
             temp_list.append(int(temp_num))
             temp_num = ""
 
-i = get_largest_product_horizontal(grid_num)
-
-print("Success!")
+print("The largest product in any direction is: ",str(get_largest_product_omnidirectional(grid_num)))
+print("--- %s seconds ---" % (time.time() - start_time))
